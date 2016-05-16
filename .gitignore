@@ -1,0 +1,12 @@
+*
+!.gitignore
+
+!.git-prompt.sh
+!.bash*
+.bash_history
+.bash_logout
+.bash_profile
+
+!.emacs.d
+!.*/*
+.*/*~
