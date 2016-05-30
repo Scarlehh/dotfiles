@@ -42,6 +42,8 @@ shopt -s checkwinsize
 [ -f ~/.bash_colours    ] && . ~/.bash_colours
 # User completions
 [ -f ~/.bash_completion ] && . ~/.bash_completion
+# Function definitions
+[ -f ~/.bash_functions ] && . ~/.bash_functions
 
 # Colour man pages
 man() {
