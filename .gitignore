@@ -6,7 +6,7 @@
 .bash_history
 .bash_logout
 .bash_profile
-.thunderbird
+!.thunderbird
 
 !.emacs.d
 !.*/*
