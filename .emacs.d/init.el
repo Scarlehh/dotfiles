@@ -7,7 +7,7 @@
    'package-archives
    '("melpa" . "http://melpa.org/packages/")
    t)
-    (package-initialize))
+  (package-initialize))
 
 
 ;;; ------------
@@ -46,6 +46,9 @@
 (defvaralias 'c-basic-offset 'tab-width)
 (global-set-key (kbd "DEL") 'backward-delete-char)
 (setq c-backspace-function 'backward-delete-char)
+
+;; Scala indentation
+(setq scala-indent:step 4)
 
 
 ;;; -------
