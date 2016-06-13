@@ -1,5 +1,5 @@
 [user]
-        name = AUTHORNAME
-		email = AUTHOREMAIL
+        name = Scarlett
+	email = Gourley
 [credential]
-		helper = GIT_CREDENTIAL_HELPER
+	helper = cache
