@@ -3,3 +3,6 @@ alias emacs='emacs -nw'
 
 # ls
 alias ls='ls --color=auto'
+
+# Confirmation before stupidly deleting everything
+alias rm="rm -i"
