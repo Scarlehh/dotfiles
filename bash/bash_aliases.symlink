@@ -6,3 +6,6 @@ alias ls='ls --color=auto'
 
 # Confirmation before stupidly deleting everything
 alias rm="rm -i"
+
+# Clear shortcut
+alias c="clear"
