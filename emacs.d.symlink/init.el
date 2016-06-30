@@ -16,27 +16,18 @@
 ;; Turn on line numbers
 (global-linum-mode 1)
 
-;; Default string
-(defvar my-linum-format-string "%d \u2502 ")
+;; Relative line numbers
+(linum-relative-mode 1)
+(setq linum-relative-current-symbol "")
 
+;; Default linum string
 (unless window-system
   (add-hook 'linum-before-numbering-hook
 	    (lambda ()
-	      (setq-local linum-format-fmt
+	      (setq-local linum-relative-format
 			  (let ((w (length (number-to-string
 					    (count-lines (point-min) (point-max))))))
-			    (concat "%" (number-to-string w) "d\u2502 "))))))
-
-(defun linum-format-func (line)
-  (concat
-   (propertize (format linum-format-fmt line) 'face 'linum)
-   (propertize "" 'face 'mode-line)))
-
-(unless window-system
-    (setq linum-format 'linum-format-func))
-
-;; Relative line numbers
-(linum-relative-mode 1)
+			    (concat "%" (number-to-string w) "s\u2502"))))))
 
 ;;; -----------
 ;;; Indentation
