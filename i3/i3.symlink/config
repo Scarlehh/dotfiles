@@ -174,3 +174,5 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # Startup launchers
 # Keyboard
 exec setxkbmap gb
+bindsym $mod+l exec setxkbmap -layout us -variant dvp
+bindsym $mod+n exec setxkbmap gb
