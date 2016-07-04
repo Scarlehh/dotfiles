@@ -5,7 +5,7 @@ alias emacs='emacs -nw'
 alias ls='ls --color=auto'
 
 # Confirmation before stupidly deleting everything
-alias rm="rm -i"
+alias rm="rm -f"
 
 # Clear shortcut
 alias c="clear"
