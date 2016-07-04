@@ -9,3 +9,7 @@ alias rm="rm -f"
 
 # Clear shortcut
 alias c="clear"
+
+# Lazy info
+alias calander="cal -y"
+alias weather="curl wttr.in/$1"
