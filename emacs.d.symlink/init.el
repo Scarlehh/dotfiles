@@ -46,6 +46,11 @@
 			(setq tab-width 4)
 			(setq python-indent 4)))
 
+;; Latex indentation
+(setq LaTeX-indent-level 4)
+(setq LaTeX-item-indent 0)
+(setq TeX-brace-indent-level 4)
+
 
 ;;; --------
 ;;; Web Mode
