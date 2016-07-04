@@ -23,11 +23,11 @@
 ;; Default linum string
 (unless window-system
   (add-hook 'linum-before-numbering-hook
-	    (lambda ()
-	      (setq-local linum-relative-format
-			  (let ((w (length (number-to-string
-					    (count-lines (point-min) (point-max))))))
-			    (concat "%" (number-to-string w) "s\u2502"))))))
+			(lambda ()
+			  (setq-local linum-relative-format
+						  (let ((w (length (number-to-string
+											(count-lines (point-min) (point-max))))))
+							(concat "%" (number-to-string w) "s\u2502"))))))
 
 ;;; -----------
 ;;; Indentation
