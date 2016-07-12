@@ -1,11 +1,16 @@
+# Look for the next word after sudo
+alias sudo='sudo '
+
 # Emacs
 alias emacs='emacs -nw'
+alias e='emacs'
 
 # ls
 alias ls='ls --color=auto'
+alias l='ls'
 
 # Confirmation before stupidly deleting everything
-alias rm="rm -f"
+alias rmf="rm -f"
 
 # Clear shortcut
 alias c="clear"
