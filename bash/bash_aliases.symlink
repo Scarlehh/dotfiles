@@ -1,11 +1,20 @@
+# Look for the next word after sudo
+alias sudo='sudo '
+
 # Emacs
 alias emacs='emacs -nw'
+alias e='emacs'
 
 # ls
 alias ls='ls --color=auto'
+alias l='ls'
 
 # Confirmation before stupidly deleting everything
-alias rm="rm -i"
+alias rmf="rm -f"
 
 # Clear shortcut
 alias c="clear"
+
+# Lazy info
+alias calander="cal -y"
+alias weather="curl wttr.in/$1"
