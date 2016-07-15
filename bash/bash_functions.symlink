@@ -8,3 +8,13 @@ function mdwc {
 	when-changed $1.md pandoc $1.md -o $1.pdf &
 	evince $1.pdf
 }
+
+function comptex {
+	xelatex $1.tex
+	rm $1.out
+	rm $1.toc
+	rm $1.aux
+	rm $1.nav
+	rm $1.log
+	rm $1.snm
+}
