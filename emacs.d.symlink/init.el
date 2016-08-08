@@ -11,6 +11,14 @@
   (package-initialize))
 
 
+;;; -----------
+;;; Key Binding
+;;; -----------
+
+(global-set-key (kbd "C-o") (kbd "C-e RET"))
+(global-set-key (kbd "C-i") (kbd "C-a RET <up>"))
+
+
 ;;; ------------
 ;;; Line Numbers
 ;;; ------------
