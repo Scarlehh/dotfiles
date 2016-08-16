@@ -47,25 +47,26 @@
 (setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64
 						68 72 76 80 84 88 92 96 100 104 108 112 116 120))
 
-;; C tab with 4 space tabs
-(defvaralias 'c-basic-offset 'tab-width)
+;; C 4 space tabs
+(setq c-basic-offset tab-width)
 ;(global-set-key (kbd "DEL") 'backward-delete-char)
 (setq c-backspace-function 'backward-delete-char)
 
-;; Python tab with 4 spaces
+;; Python 4 spaces
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(setq indent-tabs-mode nil)))
 
-;; Latex indentation
-(setq LaTeX-indent-level 4)
+;; Latex
+(setq LaTeX-indent-level tab-width)
 (setq LaTeX-item-indent 0)
-(setq TeX-brace-indent-level 4)
+(setq TeX-brace-indent-level tab-width)
 
-;; Javascript tab with 4 spaces
+;; Javascript 4 space tabs
 (add-hook 'js-mode-hook
 		  (lambda ()
-			(setq indent-tabs-mode nil)))
+			(setq indent-tabs-mode nil)
+			(setq js-indent-level 2)))
 
 
 ;;; --------
