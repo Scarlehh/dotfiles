@@ -11,12 +11,20 @@
   (package-initialize))
 
 
+;;; -----
+;;; Modes
+;;; -----
+;; Auto refresh buffer after save
+(global-auto-revert-mode t)
+
+
 ;;; -----------
 ;;; Key Binding
 ;;; -----------
 
 (global-set-key (kbd "C-o") (kbd "C-e RET"))
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
 
 ;;; ------------
