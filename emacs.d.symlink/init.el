@@ -11,6 +11,26 @@
   (package-initialize))
 
 
+;;; ----------------
+;;; System Clipboard
+;;; ----------------
+;; Copy
+(defun copy-to-x-clipboard()
+  (interactive)
+  (if (region-active-p)
+	  (progn
+		(shell-command-on-region (region-beginning) (region-end) "xsel -ib")
+		(message "Yanked region to clipboard!")
+		(deactivate-mark))
+	(message "No region active; can't yank to clipboard!")))
+
+;; Paste
+(defun paste-from-x-clipboard()
+  (interactive)
+  (shell-command "xsel -ob")
+  (insert-buffer "*Shell Command Output*")
+  (kill-buffer "*Shell Command Output*"))
+
 ;;; -----
 ;;; Modes
 ;;; -----
@@ -21,10 +41,11 @@
 ;;; -----------
 ;;; Key Binding
 ;;; -----------
-
 (global-set-key (kbd "C-o") (kbd "C-e RET"))
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
+(global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
 
 
 ;;; ------------
