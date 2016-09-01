@@ -10,6 +10,8 @@
    t)
   (package-initialize))
 
+;; Enable window moving
+(windmove-default-keybindings)
 
 ;;; ----------------
 ;;; System Clipboard
@@ -130,6 +132,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-enabled-themes (quote (tango-dark)))
  '(vhdl-indent-tabs-mode t))
 (custom-set-faces
@@ -139,3 +142,4 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'downcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
