@@ -9,6 +9,9 @@ alias e='emacs'
 alias ls='ls --color=auto'
 alias l='ls'
 
+# cat syntax highlighting
+alias dog='highlight -O ansi'
+
 # Confirmation before stupidly deleting everything
 alias rmf="rm -f"
 
