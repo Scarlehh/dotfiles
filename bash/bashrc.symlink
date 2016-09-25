@@ -98,11 +98,10 @@ for flag in DIRTYSTATE STASHSTATE UPSTREAM; do
   export "GIT_PS1_SHOW${flag}"=auto
 done
 
+# nvm
+export NVM_DIR="/home/scarlett/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
 # Allow safe usage of boolean expressions without spamming error return codes;
 # actual errors should (hopefully) manifest by other means
 true
-
-
-
-export NVM_DIR="/home/scarlett/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
