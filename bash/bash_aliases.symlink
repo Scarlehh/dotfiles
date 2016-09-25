@@ -18,6 +18,10 @@ alias rmf="rm -f"
 # Clear shortcut
 alias c="clear"
 
+# Lazy config
+alias wifi="nmtui"
+alias wifi-edit="nmtui-edit"
+
 # Lazy info
 alias calander="cal -y"
 alias weather="curl wttr.in/$1"
