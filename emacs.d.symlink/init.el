@@ -1,5 +1,5 @@
 ;;; -------------
-;;; Bootstrapping
+1;4402;0c;;; Bootstrapping
 ;;; -------------
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -9,6 +9,9 @@
    '("melpa" . "http://melpa.org/packages/")
    t)
   (package-initialize))
+
+;; Custom Packages
+(add-to-list 'load-path "./custom-packages/")
 
 ;; Enable window moving
 (windmove-default-keybindings)
@@ -39,6 +42,14 @@
 ;; Auto refresh buffer after save
 (global-auto-revert-mode t)
 
+;; Prolog
+(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
+(setq prolog-system 'swi)
+(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
+                                ("\\.m$" . mercury-mode))
+							  auto-mode-alist))
 
 ;;; -----------
 ;;; Key Binding
@@ -80,7 +91,7 @@
 
 ;; C 4 space tabs
 (setq c-basic-offset tab-width)
-;(global-set-key (kbd "DEL") 'backward-delete-char)
+										;(global-set-key (kbd "DEL") 'backward-delete-char)
 (setq c-backspace-function 'backward-delete-char)
 
 ;; Python 4 spaces
@@ -122,7 +133,7 @@
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
-		  
+
 ;;; -------
 ;;; CUSTOM
 ;;; -------
@@ -134,6 +145,9 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-enabled-themes (quote (tango-dark)))
+ '(package-selected-packages
+   (quote
+	(web-mode markdown-mode linum-relative auctex ace-jump-mode)))
  '(vhdl-indent-tabs-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
