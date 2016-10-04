@@ -18,6 +18,9 @@ alias rmf="rm -f"
 # Clear shortcut
 alias c="clear"
 
+# Dropbox
+alias dbc="dropbox-cli"
+
 # Lazy config
 alias wifi="nmtui"
 alias wifi-edit="nmtui-edit"
