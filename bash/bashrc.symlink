@@ -45,6 +45,9 @@ shopt -s checkwinsize
 # Function definitions
 [ -f ~/.bash_functions ] && . ~/.bash_functions
 
+# Includes
+source ~/.git-prompt.sh
+
 # Colour man pages
 man() {
   env LESS_TERMCAP_mb=$'\E[01;31m'       \
@@ -66,8 +69,6 @@ man() {
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
   debian_chroot=$(cat /etc/debian_chroot)
 fi
-
-source ~/.git-prompt.sh
 
 git_ps1() {
   local rc=$?
