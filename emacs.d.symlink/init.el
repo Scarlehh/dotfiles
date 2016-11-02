@@ -10,6 +10,14 @@
    t)
   (package-initialize))
 
+;; Enable window moving
+(windmove-default-keybindings)
+
+
+;;; --------
+;;; PACKAGES
+;;; --------
+
 ;; Install packages that are used
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
@@ -20,19 +28,68 @@
 
 ;; Defined packages
 ;(use-package auctex)
-(use-package avy)
-(use-package avy-zap)
-(use-package csharp-mode)
-(use-package haskell-mode)
-(use-package ivy)
-(use-package linum-relative)
-(use-package markdown-mode)
-(use-package swiper)
-(use-package web-beautify)
-(use-package web-mode)
+(use-package avy
+  :bind
+  ("C-c SPC" . avy-goto-char))
 
-;; Enable window moving
-(windmove-default-keybindings)
+(use-package avy-zap
+  :bind
+  ("M-z" . avy-zap-up-to-char))
+
+(use-package csharp-mode)
+
+(use-package haskell-mode)
+
+(use-package ivy
+  :init
+  (ivy-mode 1)
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) "))
+
+(use-package linum-relative
+  :init
+  (global-linum-mode 1)
+  (linum-relative-mode 1)
+  :config
+  ;; Relative line numbers
+  (setq linum-relative-current-symbol "")
+  ;; Default linum string
+  (unless window-system
+	(add-hook 'linum-before-numbering-hook
+			  (lambda ()
+				(setq-local linum-relative-format
+							(let ((w (length (number-to-string
+											  (count-lines (point-min) (point-max))))))
+							  (concat "%" (number-to-string w) "s\u2502")))))))
+
+(use-package markdown-mode)
+
+(use-package swiper
+  :bind
+  ("C-s" . swiper))
+
+(use-package web-beautify)
+
+(use-package web-mode
+  :init
+  (add-hook 'web-mode-hook
+			(lambda()
+			  ;; HTML
+			  (setq web-mode-markup-indent-offset 4)
+			  ;; CSS
+			  (setq web-mode-css-indent-offset 4)
+			  ;; JS/PHP/etc
+			  (setq web-mode-code-indent-offset 4)))
+  :mode
+  ("\\.html?\\'" . web-mode)
+  ("\\.phtml\\'" . web-mode)
+  ("\\.tpl\\.php\\'" . web-mode)
+  ("\\.[agj]sp\\'" . web-mode)
+  ("\\.as[cp]x\\'" . web-mode)
+  ("\\.erb\\'" . web-mode)
+  ("\\.mustache\\'" . web-mode)
+  ("\\.djhtml\\'" . web-mode))
 
 
 ;;; ----------------
@@ -55,16 +112,12 @@
   (insert-buffer "*Shell Command Output*")
   (kill-buffer "*Shell Command Output*"))
 
+
 ;;; --------
 ;;; Enabling
 ;;; --------
 ;; Auto refresh buffer after save
 (global-auto-revert-mode t)
-
-;; Ivy
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
 
 
 ;;; -----------
@@ -72,31 +125,9 @@
 ;;; -----------
 (global-set-key (kbd "C-o") (kbd "C-e RET"))
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
-;(global-set-key (kbd "C-c SPC") 'avy-goto-char)
-(global-set-key (kbd "M-z") 'avy-zap-up-to-char)
-(global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
 (global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
 
-
-;;; ------------
-;;; Line Numbers
-;;; ------------
-;; Turn on line numbers
-(global-linum-mode 1)
-
-;; Relative line numbers
-(linum-relative-mode 1)
-(setq linum-relative-current-symbol "")
-
-;; Default linum string
-(unless window-system
-  (add-hook 'linum-before-numbering-hook
-			(lambda ()
-			  (setq-local linum-relative-format
-						  (let ((w (length (number-to-string
-											(count-lines (point-min) (point-max))))))
-							(concat "%" (number-to-string w) "s\u2502"))))))
 
 ;;; -----------
 ;;; Indentation
@@ -109,46 +140,34 @@
 
 ;; C 4 space tabs
 (setq c-basic-offset tab-width)
-										;(global-set-key (kbd "DEL") 'backward-delete-char)
+;(global-set-key (kbd "DEL") 'backward-delete-char)
 (setq c-backspace-function 'backward-delete-char)
 
+;;; -----------------
+;;; PROGRAMMING HOOKS
+;;; -----------------
 ;; Python 4 spaces
 (add-hook 'python-mode-hook
 		  (lambda ()
 			(setq indent-tabs-mode nil)))
 
-;; Latex
-(setq LaTeX-indent-level tab-width)
-(setq LaTeX-item-indent 0)
-(setq TeX-brace-indent-level tab-width)
+;; LaTeX
+(add-hook 'LaTeX-mode-hook
+		  (lambda()
+			(setq LaTeX-indent-level tab-width)
+			(setq LaTeX-item-indent 0)
+			(setq TeX-brace-indent-level tab-width)
+			(setq indent-tabs-mode t)))
 
 ;; Javascript 4 space tabs
 (add-hook 'js-mode-hook
 		  (lambda ()
-			(setq indent-tabs-mode nil)
-			(setq js-indent-level 2)))
+			(setq js-indent-level 4)))
 
 
 ;;; -----
 ;;; Modes
-;;; -----
-;; Web Mode
-(require 'web-mode)
-
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-
-(defun my-web-mode-hook ()
-  (setq-default indent-tabs-mode nil)
-  )
-(add-hook 'web-mode-hook  'my-web-mode-hook)
-
+;;; -----			
 ;; Prolog
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
 (autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
