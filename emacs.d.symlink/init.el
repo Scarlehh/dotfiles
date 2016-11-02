@@ -10,11 +10,30 @@
    t)
   (package-initialize))
 
-;; Custom Packages
-(add-to-list 'load-path "./custom-packages/")
+;; Install packages that are used
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+;; Defined packages
+;(use-package auctex)
+(use-package avy)
+(use-package avy-zap)
+(use-package csharp-mode)
+(use-package haskell-mode)
+(use-package ivy)
+(use-package linum-relative)
+(use-package markdown-mode)
+(use-package swiper)
+(use-package web-beautify)
+(use-package web-mode)
 
 ;; Enable window moving
 (windmove-default-keybindings)
+
 
 ;;; ----------------
 ;;; System Clipboard
@@ -53,7 +72,7 @@
 ;;; -----------
 (global-set-key (kbd "C-o") (kbd "C-e RET"))
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
-(global-set-key (kbd "C-c SPC") 'avy-goto-char)
+;(global-set-key (kbd "C-c SPC") 'avy-goto-char)
 (global-set-key (kbd "M-z") 'avy-zap-up-to-char)
 (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
@@ -150,9 +169,7 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages
-   (quote
-	(swiper avy-zap avy ivy haskell-mode web-beautify csharp-mode org web-mode markdown-mode linum-relative auctex)))
+ '(package-selected-packages (quote (org auctex)))
  '(vhdl-indent-tabs-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
