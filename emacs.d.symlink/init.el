@@ -1,5 +1,5 @@
 ;;; -------------
-1;4402;0c;;; Bootstrapping
+;;; BOOTSTRAPPING
 ;;; -------------
 ;; Melpa
 (when (>= emacs-major-version 24)
@@ -36,27 +36,22 @@
   (insert-buffer "*Shell Command Output*")
   (kill-buffer "*Shell Command Output*"))
 
-;;; -----
-;;; Modes
-;;; -----
+;;; --------
+;;; Enabling
+;;; --------
 ;; Auto refresh buffer after save
 (global-auto-revert-mode t)
 
-;; Prolog
-(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
-(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
-(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
-(setq prolog-system 'swi)
-(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
-                                ("\\.m$" . mercury-mode))
-							  auto-mode-alist))
+;; Ivy
+(ivy-mode 1)
+
 
 ;;; -----------
 ;;; Key Binding
 ;;; -----------
 (global-set-key (kbd "C-o") (kbd "C-e RET"))
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'avy-goto-char)
 (global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
 (global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
 
@@ -111,12 +106,12 @@
 			(setq js-indent-level 2)))
 
 
-;;; --------
-;;; Web Mode
-;;; --------
+;;; -----
+;;; Modes
+;;; -----
+;; Web Mode
 (require 'web-mode)
 
-;; Auto-load
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -126,13 +121,19 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
-;; Hooks
 (defun my-web-mode-hook ()
-  ;; Indentation
   (setq-default indent-tabs-mode nil)
   )
 (add-hook 'web-mode-hook  'my-web-mode-hook)
 
+;; Prolog
+(autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
+(autoload 'prolog-mode "prolog" "Major mode for editing Prolog programs." t)
+(autoload 'mercury-mode "prolog" "Major mode for editing Mercury programs." t)
+(setq prolog-system 'swi)
+(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
+                                ("\\.m$" . mercury-mode))
+							  auto-mode-alist))
 
 ;;; -------
 ;;; CUSTOM
@@ -147,7 +148,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-	(web-mode markdown-mode linum-relative auctex ace-jump-mode)))
+	(avy ivy haskell-mode web-beautify csharp-mode org web-mode markdown-mode linum-relative auctex)))
  '(vhdl-indent-tabs-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
