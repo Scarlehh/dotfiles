@@ -44,6 +44,8 @@
 
 ;; Ivy
 (ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
 
 
 ;;; -----------
@@ -52,6 +54,8 @@
 (global-set-key (kbd "C-o") (kbd "C-e RET"))
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
 (global-set-key (kbd "C-c SPC") 'avy-goto-char)
+(global-set-key (kbd "M-z") 'avy-zap-up-to-char)
+(global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
 (global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
 
@@ -148,7 +152,7 @@
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-	(avy ivy haskell-mode web-beautify csharp-mode org web-mode markdown-mode linum-relative auctex)))
+	(swiper avy-zap avy ivy haskell-mode web-beautify csharp-mode org web-mode markdown-mode linum-relative auctex)))
  '(vhdl-indent-tabs-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
