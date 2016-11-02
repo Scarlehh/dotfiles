@@ -1,12 +1,8 @@
 #!/bin/bash
 
+# LaTeX compilation
 function md {
-    pandoc --latex-engine=xelatex $1.md -o $1.pdf
-}
-
-function mdwc {
-	when-changed $1.md pandoc $1.md -o $1.pdf &
-	evince $1.pdf
+    pandoc --latex-engine=xelatex $2 $1.md -o $1.pdf
 }
 
 function comptex {
