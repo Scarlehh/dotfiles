@@ -106,3 +106,6 @@ export NVM_DIR="/home/scarlett/.nvm"
 # Allow safe usage of boolean expressions without spamming error return codes;
 # actual errors should (hopefully) manifest by other means
 true
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
