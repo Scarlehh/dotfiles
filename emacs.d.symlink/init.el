@@ -136,11 +136,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
         ivy-count-format "(%d/%d) "))
 
 (use-package js
-  :init
-  ;; Javascript 4 space tabs
-  (add-hook 'js-mode-hook
-            (lambda ()
-              (setq js-indent-level 4))))
+  :config
+  ;; JavaScript 4 space tabs
+  (setq-default js-indent-level 4))
 
 (use-package linum-relative
   :init
@@ -183,12 +181,11 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (use-package web-beautify)
 
 (use-package web-mode
-  :init
-  (add-hook 'web-mode-hook
-            (lambda()
-              (setq web-mode-markup-indent-offset 4    ; HTML
-                    web-mode-css-indent-offset    4    ; CSS
-                    web-mode-code-indent-offset   4))) ; JS/PHP/etc.
+  :config
+  (setq-default
+   web-mode-markup-indent-offset 4      ; HTML
+   web-mode-css-indent-offset    4      ; CSS
+   web-mode-code-indent-offset   4)     ; JS/PHP/etc.
   :mode
   ("\\.html?\\'" . web-mode)
   ("\\.phtml\\'" . web-mode)
