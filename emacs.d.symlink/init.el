@@ -10,9 +10,6 @@
  '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
-;; Enable window moving
-(windmove-default-keybindings)
-
 
 ;;; --------
 ;;; PACKAGES
@@ -31,7 +28,20 @@
 
 ;; Defined packages
 (use-package tex
-  :ensure auctex)
+  :ensure auctex
+  :init
+  ;; LaTeX
+  (add-hook 'LaTeX-mode-hook
+            (lambda()
+              (setq LaTeX-indent-level tab-width
+                    LaTeX-item-indent 0
+                    TeX-brace-indent-level tab-width
+                    indent-tabs-mode t))))
+
+(use-package autorevert
+  :init
+  ;; Auto refresh buffer after save
+  (global-auto-revert-mode))
 
 (use-package avy
   :bind
@@ -40,6 +50,12 @@
 (use-package avy-zap
   :bind
   ("M-z" . avy-zap-up-to-char))
+
+(use-package cc-mode
+  :config
+  ;; C 4 space tabs
+  (setq c-basic-offset tab-width
+        c-backspace-function #'backward-delete-char))
 
 (use-package csharp-mode)
 
@@ -52,10 +68,17 @@
   (setq ivy-use-virtual-buffers t
         ivy-count-format "(%d/%d) "))
 
+(use-package js
+  :init
+  ;; Javascript 4 space tabs
+  (add-hook 'js-mode-hook
+            (lambda ()
+              (setq js-indent-level 4))))
+
 (use-package linum-relative
   :init
-  (global-linum-mode 1)
-  (linum-relative-mode 1)
+  (global-linum-mode)
+  (linum-relative-mode)
   :config
   ;; Relative line numbers
   (setq linum-relative-current-symbol "")
@@ -71,9 +94,25 @@
 
 (use-package markdown-mode)
 
+(use-package prolog
+  :mode ("\\.pl\\'" . prolog-mode)
+  :config
+  (setq prolog-system 'swi))
+
+(use-package python
+  :init
+  ;; Python 4 spaces
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq indent-tabs-mode nil))))
+
 (use-package swiper
   :bind
   ("C-s" . swiper))
+
+(use-package vhdl-mode
+  :config
+  (setq-default vhdl-indent-tabs-mode t))
 
 (use-package web-beautify)
 
@@ -93,6 +132,11 @@
   ("\\.erb\\'" . web-mode)
   ("\\.mustache\\'" . web-mode)
   ("\\.djhtml\\'" . web-mode))
+
+(use-package windmove
+  :init
+  ;; Enable window moving
+  (windmove-default-keybindings))
 
 
 ;;; ----------------
@@ -117,14 +161,6 @@
   (kill-buffer "*Shell Command Output*"))
 
 
-;;; --------
-;;; Enabling
-;;; --------
-
-;; Auto refresh buffer after save
-(global-auto-revert-mode t)
-
-
 ;;; -----------
 ;;; Key Binding
 ;;; -----------
@@ -133,6 +169,7 @@
 (global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
 (global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
 (global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
+;; (global-set-key (kbd "DEL") 'backward-delete-char)
 
 
 ;;; -----------
@@ -142,43 +179,7 @@
 ;; Default indentation with 4 space tabs
 (setq-default indent-tabs-mode t
               tab-width 4)
-(setq tab-stop-list (number-sequence 4 120 4))
 
-;; C 4 space tabs
-(setq c-basic-offset tab-width
-      c-backspace-function 'backward-delete-char)
-;; (global-set-key (kbd "DEL") 'backward-delete-char)
-
-;;; -----------------
-;;; PROGRAMMING HOOKS
-;;; -----------------
-
-;; Python 4 spaces
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq indent-tabs-mode nil)))
-
-;; LaTeX
-(add-hook 'LaTeX-mode-hook
-          (lambda()
-            (setq LaTeX-indent-level tab-width
-                  LaTeX-item-indent 0
-                  TeX-brace-indent-level tab-width
-                  indent-tabs-mode t)))
-
-;; Javascript 4 space tabs
-(add-hook 'js-mode-hook
-          (lambda ()
-            (setq js-indent-level 4)))
-
-
-;;; -----
-;;; Modes
-;;; -----
-
-;; Prolog
-(setq prolog-system 'swi)
-(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
 ;;; -------
 ;;; CUSTOM
@@ -191,8 +192,7 @@
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages (quote (org auctex)))
- '(vhdl-indent-tabs-mode t))
+ '(package-selected-packages (quote (org auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
