@@ -19,21 +19,23 @@
 ;;; ----------------
 
 ;; Copy
-(defun copy-to-x-clipboard()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (shell-command-on-region (region-beginning) (region-end) "xsel -ib")
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-    (message "No region active; can't yank to clipboard!")))
+(defun copy-to-x-clipboard (&optional start end)
+  (interactive "r")
+  (let ((code (shell-command-on-region
+               (or start (region-beginning))
+               (or end   (region-end))
+               "xsel -ib")))
+    (if (/= code 0)
+        (message "xsel returned error code %d" code)
+      (message "Yanked region to clipboard!")
+      (deactivate-mark))))
 
 ;; Paste
-(defun paste-from-x-clipboard()
+(defun paste-from-x-clipboard ()
   (interactive)
-  (shell-command "xsel -ob")
-  (insert-buffer "*Shell Command Output*")
-  (kill-buffer "*Shell Command Output*"))
+  (let ((code (call-process-shell-command "xsel -ob" nil t)))
+    (unless (zerop code)
+      (message "xsel returned error code %d" code))))
 
 
 ;;; -----------
