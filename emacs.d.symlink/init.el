@@ -42,11 +42,13 @@
 ;;; Key Binding
 ;;; -----------
 
-(global-set-key (kbd "C-o") (kbd "C-e RET"))
-(global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
-(global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
-(global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
-;; (global-set-key (kbd "DEL") 'backward-delete-char)
+(bind-keys
+ ;; ("DEL"     . backward-delete-char)
+ ;; `bind-keys' interpets "C-e RET" literally, so use keyboard macro syntax ;_;
+ ("C-o"     . "\C-e\C-m")
+ ("C-j"     . "\C-a\C-m\C-p")
+ ("C-x C-w" . copy-to-x-clipboard)
+ ("C-x C-y" . paste-from-x-clipboard))
 
 
 ;;; -----------
