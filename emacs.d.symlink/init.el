@@ -49,8 +49,8 @@
   :init
   (ivy-mode 1)
   :config
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) "))
+  (setq ivy-use-virtual-buffers t
+        ivy-count-format "(%d/%d) "))
 
 (use-package linum-relative
   :init
@@ -81,12 +81,9 @@
   :init
   (add-hook 'web-mode-hook
             (lambda()
-              ;; HTML
-              (setq web-mode-markup-indent-offset 4)
-              ;; CSS
-              (setq web-mode-css-indent-offset 4)
-              ;; JS/PHP/etc
-              (setq web-mode-code-indent-offset 4)))
+              (setq web-mode-markup-indent-offset 4    ; HTML
+                    web-mode-css-indent-offset    4    ; CSS
+                    web-mode-code-indent-offset   4))) ; JS/PHP/etc.
   :mode
   ("\\.html?\\'" . web-mode)
   ("\\.phtml\\'" . web-mode)
@@ -143,15 +140,14 @@
 ;;; -----------
 
 ;; Default indentation with 4 space tabs
-(setq-default indent-tabs-mode t)
-(setq-default tab-width 4)
-(setq tab-stop-list '(4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64
-                        68 72 76 80 84 88 92 96 100 104 108 112 116 120))
+(setq-default indent-tabs-mode t
+              tab-width 4)
+(setq tab-stop-list (number-sequence 4 120 4))
 
 ;; C 4 space tabs
-(setq c-basic-offset tab-width)
+(setq c-basic-offset tab-width
+      c-backspace-function 'backward-delete-char)
 ;; (global-set-key (kbd "DEL") 'backward-delete-char)
-(setq c-backspace-function 'backward-delete-char)
 
 ;;; -----------------
 ;;; PROGRAMMING HOOKS
@@ -165,10 +161,10 @@
 ;; LaTeX
 (add-hook 'LaTeX-mode-hook
           (lambda()
-            (setq LaTeX-indent-level tab-width)
-            (setq LaTeX-item-indent 0)
-            (setq TeX-brace-indent-level tab-width)
-            (setq indent-tabs-mode t)))
+            (setq LaTeX-indent-level tab-width
+                  LaTeX-item-indent 0
+                  TeX-brace-indent-level tab-width
+                  indent-tabs-mode t)))
 
 ;; Javascript 4 space tabs
 (add-hook 'js-mode-hook
@@ -182,8 +178,7 @@
 
 ;; Prolog
 (setq prolog-system 'swi)
-(setq auto-mode-alist (append '(("\\.pl$" . prolog-mode))
-                              auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.pl\\'" . prolog-mode))
 
 ;;; -------
 ;;; CUSTOM
