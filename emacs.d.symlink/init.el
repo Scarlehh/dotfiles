@@ -10,6 +10,51 @@
  '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
 
+;;; --------
+;;; SETTINGS
+;;; --------
+
+;;; ----------------
+;;; System Clipboard
+;;; ----------------
+
+;; Copy
+(defun copy-to-x-clipboard()
+  (interactive)
+  (if (region-active-p)
+      (progn
+        (shell-command-on-region (region-beginning) (region-end) "xsel -ib")
+        (message "Yanked region to clipboard!")
+        (deactivate-mark))
+    (message "No region active; can't yank to clipboard!")))
+
+;; Paste
+(defun paste-from-x-clipboard()
+  (interactive)
+  (shell-command "xsel -ob")
+  (insert-buffer "*Shell Command Output*")
+  (kill-buffer "*Shell Command Output*"))
+
+
+;;; -----------
+;;; Key Binding
+;;; -----------
+
+(global-set-key (kbd "C-o") (kbd "C-e RET"))
+(global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
+(global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
+(global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
+;; (global-set-key (kbd "DEL") 'backward-delete-char)
+
+
+;;; -----------
+;;; Indentation
+;;; -----------
+
+;; Default indentation with 4 space tabs
+(setq-default indent-tabs-mode t
+              tab-width 4)
+
 
 ;;; --------
 ;;; PACKAGES
@@ -136,48 +181,6 @@
   :init
   ;; Enable window moving
   (windmove-default-keybindings))
-
-
-;;; ----------------
-;;; System Clipboard
-;;; ----------------
-
-;; Copy
-(defun copy-to-x-clipboard()
-  (interactive)
-  (if (region-active-p)
-      (progn
-        (shell-command-on-region (region-beginning) (region-end) "xsel -ib")
-        (message "Yanked region to clipboard!")
-        (deactivate-mark))
-    (message "No region active; can't yank to clipboard!")))
-
-;; Paste
-(defun paste-from-x-clipboard()
-  (interactive)
-  (shell-command "xsel -ob")
-  (insert-buffer "*Shell Command Output*")
-  (kill-buffer "*Shell Command Output*"))
-
-
-;;; -----------
-;;; Key Binding
-;;; -----------
-
-(global-set-key (kbd "C-o") (kbd "C-e RET"))
-(global-set-key (kbd "C-j") (kbd "C-a RET <up>"))
-(global-set-key (kbd "C-x C-w") 'copy-to-x-clipboard)
-(global-set-key (kbd "C-x C-y") 'paste-from-x-clipboard)
-;; (global-set-key (kbd "DEL") 'backward-delete-char)
-
-
-;;; -----------
-;;; Indentation
-;;; -----------
-
-;; Default indentation with 4 space tabs
-(setq-default indent-tabs-mode t
-              tab-width 4)
 
 
 ;;; -------
