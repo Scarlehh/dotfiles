@@ -14,6 +14,24 @@
 ;;; SETTINGS
 ;;; --------
 
+;;; -----------
+;;; Definitions
+;;; -----------
+
+(defun fast-line-count ()
+  "Return number of lines within accessible portion of buffer.
+See URL `http://emacs.stackexchange.com/a/3822' for limitations
+and URL `https://github.com/basil-conto/dotfiles/blob/master/\
+.emacs.d/init.el' for inspiration."
+  (let ((line-number-display-limit-width most-positive-fixnum)
+        (pmax (point-max)))
+    (save-excursion
+      (goto-char pmax)
+      (- (string-to-number (format-mode-line "%l"))
+         ;; Adjust for trailing newline
+         (if (= pmax (line-beginning-position)) 1 0)))))
+
+
 ;;; ----------------
 ;;; System Clipboard
 ;;; ----------------
@@ -137,7 +155,7 @@
               (lambda ()
                 (setq-local
                  linum-relative-format
-                 (let ((lines (count-lines (point-min) (point-max))))
+                 (let ((lines (fast-line-count)))
                    (format "%%%ds│" (length (number-to-string lines)))))))))
 
 (use-package markdown-mode)
