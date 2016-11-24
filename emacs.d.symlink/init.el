@@ -187,14 +187,14 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
    web-mode-css-indent-offset    4      ; CSS
    web-mode-code-indent-offset   4)     ; JS/PHP/etc.
   :mode
-  ("\\.html?\\'" . web-mode)
-  ("\\.phtml\\'" . web-mode)
-  ("\\.tpl\\.php\\'" . web-mode)
-  ("\\.[agj]sp\\'" . web-mode)
-  ("\\.as[cp]x\\'" . web-mode)
-  ("\\.erb\\'" . web-mode)
-  ("\\.mustache\\'" . web-mode)
-  ("\\.djhtml\\'" . web-mode))
+  "\\.html?\\'"
+  "\\.phtml\\'"
+  "\\.tpl\\.php\\'"
+  "\\.[agj]sp\\'"
+  "\\.as[cp]x\\'"
+  "\\.erb\\'"
+  "\\.mustache\\'"
+  "\\.djhtml\\'")
 
 (use-package windmove
   :init
