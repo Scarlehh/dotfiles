@@ -83,14 +83,13 @@
   ;; Relative line numbers
   (setq linum-relative-current-symbol "")
   ;; Default linum string
-  (unless window-system
+  (unless (display-graphic-p)
     (add-hook 'linum-before-numbering-hook
               (lambda ()
                 (setq-local
                  linum-relative-format
-                 (let ((w (length (number-to-string
-                                   (count-lines (point-min) (point-max))))))
-                   (concat "%" (number-to-string w) "s\u2502")))))))
+                 (let ((lines (count-lines (point-min) (point-max))))
+                   (format "%%%ds│" (length (number-to-string lines)))))))))
 
 (use-package markdown-mode)
 
