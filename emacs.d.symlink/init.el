@@ -26,12 +26,12 @@
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
-(setq use-package-always-ensure t)
+(setq use-package-always-defer  t
+      use-package-always-ensure t)
 
 ;; Defined packages
 (use-package tex
-  :ensure auctex
-  :defer)
+  :ensure auctex)
 
 (use-package avy
   :bind
@@ -41,14 +41,11 @@
   :bind
   ("M-z" . avy-zap-up-to-char))
 
-(use-package csharp-mode
-  :defer)
+(use-package csharp-mode)
 
-(use-package haskell-mode
-  :defer)
+(use-package haskell-mode)
 
 (use-package ivy
-  :defer
   :init
   (ivy-mode 1)
   :config
@@ -72,18 +69,15 @@
                                    (count-lines (point-min) (point-max))))))
                    (concat "%" (number-to-string w) "s\u2502")))))))
 
-(use-package markdown-mode
-  :defer)
+(use-package markdown-mode)
 
 (use-package swiper
   :bind
   ("C-s" . swiper))
 
-(use-package web-beautify
-  :defer)
+(use-package web-beautify)
 
 (use-package web-mode
-  :defer
   :init
   (add-hook 'web-mode-hook
             (lambda()
