@@ -78,6 +78,14 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
               tab-width 4)
 
 
+;;; ---------
+;;; Scrolling
+;;; ---------
+
+;; keyboard scroll one line at a time
+(setq scroll-step 1)
+
+
 ;;; --------
 ;;; PACKAGES
 ;;; --------
