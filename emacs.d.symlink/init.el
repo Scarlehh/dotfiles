@@ -204,6 +204,14 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   "\\.mustache\\'"
   "\\.djhtml\\'")
 
+(use-package whitespace
+  :init
+  (global-whitespace-mode 1)
+  :config
+  (setq-default whitespace-style '(face
+								   trailing  ; trailing blanks
+								   empty)))  ; empty start/end of buffer
+
 (use-package windmove
   :init
   ;; Enable window moving
