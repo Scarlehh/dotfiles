@@ -66,7 +66,8 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  ("C-o"     . "\C-e\C-m")
  ("C-j"     . "\C-a\C-m\C-p")
  ("C-x C-w" . copy-to-x-clipboard)
- ("C-x C-y" . paste-from-x-clipboard))
+ ("C-x C-y" . paste-from-x-clipboard)
+ ("C-x w"   . whitespace-cleanup))
 
 
 ;;; -----------
