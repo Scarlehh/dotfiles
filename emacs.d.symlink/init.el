@@ -23,13 +23,14 @@
 See URL `http://emacs.stackexchange.com/a/3822' for limitations
 and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 .emacs.d/init.el' for inspiration."
-  (let ((line-number-display-limit-width most-positive-fixnum)
+  (let ((line-number-display-limit-width most-positive-fixnum) ; Any line width
+        (line-number-display-limit nil)                        ; Any buffer size
         (pmax (point-max)))
     (save-excursion
       (goto-char pmax)
-      (- (string-to-number (format-mode-line "%l"))
-         ;; Adjust for trailing newline
-         (if (= pmax (line-beginning-position)) 1 0)))))
+      ;; Adjust for trailing newline
+      (funcall (if (= pmax (line-beginning-position)) #'1- #'identity)
+               (string-to-number (format-mode-line "%l"))))))
 
 
 ;;; ----------------
