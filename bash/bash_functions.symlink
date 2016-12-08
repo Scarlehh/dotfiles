@@ -13,6 +13,8 @@ function comptex {
 	rm $1.nav
 	rm $1.log
 	rm $1.snm
+	rm $1.bcf
+	rm $1.run.xml
 }
 
 function pdf {
