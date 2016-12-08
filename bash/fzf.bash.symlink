@@ -1,0 +1,20 @@
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == */home/scarlett/Downloads/fzf/bin* ]]; then
+  export PATH="$PATH:/home/scarlett/Downloads/fzf/bin"
+fi
+
+# Man path
+# --------
+if [[ ! "$MANPATH" == */home/scarlett/Downloads/fzf/man* && -d "/home/scarlett/Downloads/fzf/man" ]]; then
+  export MANPATH="$MANPATH:/home/scarlett/Downloads/fzf/man"
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "/home/scarlett/Downloads/fzf/shell/completion.bash" 2> /dev/null
+
+# Key bindings
+# ------------
+source "/home/scarlett/Downloads/fzf/shell/key-bindings.bash"
+
