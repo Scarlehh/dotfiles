@@ -57,20 +57,6 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 
 
 ;;; -----------
-;;; Key Binding
-;;; -----------
-
-(bind-keys
- ;; ("DEL"     . backward-delete-char)
- ;; `bind-keys' interpets "C-e RET" literally, so use keyboard macro syntax ;_;
- ("C-o"     . "\C-e\C-m")
- ("C-j"     . "\C-a\C-m\C-p")
- ("C-x C-w" . copy-to-x-clipboard)
- ("C-x C-y" . paste-from-x-clipboard)
- ("C-x w"   . whitespace-cleanup))
-
-
-;;; -----------
 ;;; Indentation
 ;;; -----------
 
@@ -219,6 +205,20 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (windmove-default-keybindings))
 
 
+;;; -----------
+;;; Key Binding
+;;; -----------
+
+(bind-keys
+ ;; ("DEL"     . backward-delete-char)
+ ;; `bind-keys' interpets "C-e RET" literally, so use keyboard macro syntax ;_;
+ ("C-o"     . "\C-e\C-m")
+ ("C-j"     . "\C-a\C-m\C-p")
+ ("C-x C-w" . copy-to-x-clipboard)
+ ("C-x C-y" . paste-from-x-clipboard)
+ ("C-x w"   . whitespace-cleanup))
+
+
 ;;; -------
 ;;; CUSTOM
 ;;; -------
@@ -230,7 +230,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages (quote (org auctex))))
+ '(package-selected-packages (quote (evil org auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
