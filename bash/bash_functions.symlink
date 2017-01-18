@@ -5,6 +5,10 @@ function md {
     pandoc --latex-engine=xelatex $2 $1.md -o $1.pdf
 }
 
+function mdtoc {
+    pandoc --latex-engine=xelatex --table-of-contents $2 $1.md -o $1.pdf
+}
+
 function comptex {
 	xelatex $1.tex
 	rm $1.out
