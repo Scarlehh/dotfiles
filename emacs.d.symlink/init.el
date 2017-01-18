@@ -113,6 +113,19 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   :bind
   ("M-z" . avy-zap-up-to-char))
 
+(use-package bm
+  :init
+  (defun bm-at-line (line-number)
+	(interactive "*nEnter relative line number: ")
+	(save-excursion
+	  (forward-line line-number)
+	  (bm-toggle)))
+  :bind
+  ("C-x p t" . bm-at-line)
+  ("C-x p s" . bm-toggle)
+  ("C-x p n" . bm-next)
+  ("C-x p p" . pm-previous))
+
 (use-package cc-mode
   :config
   ;; C 4 space tabs
@@ -151,7 +164,32 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
                  (let ((lines (fast-line-count)))
                    (format "%%%ds│" (length (number-to-string lines)))))))))
 
-(use-package markdown-mode)
+(use-package markdown-mode
+  :config
+  (add-hook 'markdown-mode-hook 'turn-on-orgtbl)
+  (defun orgtbl-to-gfm (table params)
+	"Convert the Orgtbl mode TABLE to GitHub Flavored Markdown."
+	(let* ((alignment (mapconcat (lambda (x) (if x "|--:" "|---"))
+								 org-table-last-alignment ""))
+		   (params2
+			(list
+			 :splice t
+			 :hline (concat alignment "|")
+			 :lstart "| " :lend " |" :sep " | ")))
+	  (orgtbl-to-generic table (org-combine-plists params2 params))))
+  (defun md-table-insert (table-name)
+	(interactive "*sEnter table name: ")
+	(insert "<!---
+#+ORGTBL: SEND " table-name " orgtbl-to-gfm
+
+-->
+<!--- BEGIN RECEIVE ORGTBL " table-name " -->
+<!--- END RECEIVE ORGTBL " table-name " -->")
+	(previous-line)
+	(previous-line)
+	(previous-line)))
+
+(use-package org)
 
 (use-package prolog
   :mode ("\\.pl\\'" . prolog-mode)
@@ -231,7 +269,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
  '(custom-enabled-themes (quote (tango-dark)))
- '(package-selected-packages (quote (evil org auctex))))
+ '(package-selected-packages
+   (quote
+	(bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
