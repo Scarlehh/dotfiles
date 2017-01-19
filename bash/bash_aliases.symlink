@@ -24,7 +24,7 @@ alias calander="cal -y"
 alias weather="curl wttr.in/"
 
 # Pacman
-alias install="sudo pacman -S"
-alias remove="sudo pacman -Rs"
+alias get="sudo pacman -S"
+alias rem="sudo pacman -Rs"
 alias update="sudo pacman -Syu"
 alias update-mirror="sudo pacman -Syyu"
