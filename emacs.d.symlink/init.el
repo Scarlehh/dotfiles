@@ -189,6 +189,10 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 	(previous-line)
 	(previous-line)))
 
+(use-package neotree
+  :bind
+  ("C-x n t" . neotree))
+
 (use-package org)
 
 (use-package prolog
@@ -240,7 +244,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (use-package windmove
   :init
   ;; Enable window moving
-  (windmove-default-keybindings))
+  (windmove-default-keybindings 'meta))
 
 
 ;;; -----------
@@ -271,7 +275,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-	(bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
+	(neotree bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
