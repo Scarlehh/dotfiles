@@ -162,8 +162,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
               (lambda ()
                 (setq-local
                  linum-relative-format
-                 (let ((lines (fast-line-count)))
-                   (format "%%%ds│" (length (number-to-string lines)))))))))
+				 (let ((w (length (number-to-string
+                                   (count-lines (point-min) (point-max))))))
+                   (concat "%" (number-to-string w) "s\u2502")))))))
 
 (use-package markdown-mode
   :config
