@@ -108,4 +108,4 @@ export NVM_DIR="/home/scarlett/.nvm"
 true
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
