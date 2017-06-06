@@ -137,6 +137,13 @@ install_dotfiles () {
   done
 }
 
+install_fzf () {
+	info 'installing fuzzy finder'
+
+	git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+	~/.fzf/install
+}
+
 setup_gitconfig
 install_dotfiles
 
@@ -151,6 +158,8 @@ then
     fail "error installing dependencies"
   fi
 fi
+
+install_fzf
 
 echo ''
 echo '  All installed!'
