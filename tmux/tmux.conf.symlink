@@ -1,0 +1,3 @@
+unbind C-b
+set-option -g prefix C-M-z
+bind-key C-M-z send-prefix
