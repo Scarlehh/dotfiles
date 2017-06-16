@@ -1,3 +1,6 @@
 unbind C-b
 set-option -g prefix C-M-z
 bind-key C-M-z send-prefix
+
+set -g xterm-keys on
+set -g default-terminal "xterm-256color"
