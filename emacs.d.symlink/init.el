@@ -244,10 +244,11 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
                                    empty)))  ; empty start/end of buffer
 
 (use-package windmove
-  :init
-  ;; Enable window moving
-  (windmove-default-keybindings 'meta))
-
+  :bind
+  ("M-<left>"  . windmove-left)
+  ("M-<down>"  . windmove-down)
+  ("M-<up>"    . windmove-up)
+  ("M-<right>" . windmove-right))
 
 ;;; -----------
 ;;; Key Binding
