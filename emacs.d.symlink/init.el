@@ -242,8 +242,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (global-whitespace-mode)
   :config
   (setq-default whitespace-style '(face
-                                   trailing  ; trailing blanks
-                                   empty)))  ; empty start/end of buffer
+                                   trailing      ; trailing blanks
+                                   empty         ; empty start/end of buffer
+								   lines-tail))) ; character limit
 
 (use-package windmove
   :bind
