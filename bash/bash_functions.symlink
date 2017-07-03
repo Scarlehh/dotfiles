@@ -37,6 +37,6 @@ tmux() {
     if [[ $@ == "ks" ]]; then
         command tmux kill-session
     else
-        command ls "$@"
+        command tmux "$@"
     fi
 }
