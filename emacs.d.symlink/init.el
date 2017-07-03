@@ -127,8 +127,6 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   ("C-x p n" . bm-next)
   ("C-x p p" . pm-previous))
 
-(load-library "Arastra")
-
 (use-package cc-mode
   :config
   ;; C 4 space tabs
