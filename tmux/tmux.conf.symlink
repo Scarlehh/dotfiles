@@ -14,10 +14,12 @@ bind -n C-M-Right select-pane -R
 bind -n C-M-Up select-pane -U
 bind -n C-M-Down select-pane -D
 
-# Split commands
+## Split commands
+# open window in current path
+bind c new-window -c "#{pane_current_path}"
+bind | split-window -h -c '#{pane_current_path}'
+bind - split-window -v -c '#{pane_current_path}'
 # split panes using | and -
-bind | split-window -h
-bind - split-window -v
 unbind '"'
 unbind %
 
@@ -25,6 +27,9 @@ unbind %
 set -g mouse-select-window on
 set -g mouse-select-pane on
 set -g mouse-resize-pane on
+
+# Enable mouse mode
+#set -g mouse on
 
 # Settings
 set -g xterm-keys on
