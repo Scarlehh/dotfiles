@@ -127,6 +127,8 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   ("C-x p n" . bm-next)
   ("C-x p p" . pm-previous))
 
+(load-library "Arastra")
+
 (use-package cc-mode
   :config
   ;; C 4 space tabs
@@ -142,7 +144,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (ivy-mode 1)
   :config
   (setq ivy-use-virtual-buffers t
-        ivy-count-format "(%d/%d) "))
+        ivy-count-format "(%d/%d) ")
+  :bind
+  ("C-x b" . ivy-switch-buffer))
 
 (use-package js
   :config
@@ -164,7 +168,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
                  linum-relative-format
 				 (let ((w (length (number-to-string
                                    (count-lines (point-min) (point-max))))))
-                   (concat "%" (number-to-string w) "s\u2502")))))))
+                   (concat "%" (number-to-string w) "s|")))))));"s\u2502")))))))
 
 (use-package markdown-mode
   :config
