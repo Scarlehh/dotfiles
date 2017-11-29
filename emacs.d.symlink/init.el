@@ -133,7 +133,17 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (setq c-basic-offset tab-width
         c-backspace-function #'backward-delete-char))
 
+(use-package xcscope
+  :init
+  (cscope-setup))
+
 (use-package csharp-mode)
+
+(use-package boogie-friends
+  :config
+  (setq flycheck-dafny-executable "/usr/local/share/dafny/dafny"))
+
+(flycheck-mode t)
 
 (use-package haskell-mode)
 
@@ -281,7 +291,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-	(neotree bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
+	(xcscope boogie-friends neotree bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
