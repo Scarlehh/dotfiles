@@ -4,7 +4,7 @@
 
 ;; Melpa
 (require 'package)
-(setq package-enable-at-startup nil)
+(setq-default package-enable-at-startup nil)
 (add-to-list
  'package-archives
  '("melpa" . "https://melpa.org/packages/"))
@@ -71,7 +71,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 ;;; ---------
 
 ;; keyboard scroll one line at a time
-(setq scroll-step 1)
+(setq-default scroll-step 1)
 
 
 ;;; --------
@@ -86,8 +86,8 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
-(setq use-package-always-defer  t
-      use-package-always-ensure t)
+(setq-default use-package-always-defer  t
+			  use-package-always-ensure t)
 
 ;; Defined packages
 (use-package tex
@@ -96,10 +96,10 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   ;; LaTeX
   (add-hook 'LaTeX-mode-hook
             (lambda()
-              (setq LaTeX-indent-level tab-width
-                    LaTeX-item-indent 0
-                    TeX-brace-indent-level tab-width
-                    indent-tabs-mode t))))
+              (setq-default LaTeX-indent-level tab-width
+							LaTeX-item-indent 0
+							TeX-brace-indent-level tab-width
+							indent-tabs-mode t))))
 
 (use-package autorevert
   :init
@@ -130,8 +130,8 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (use-package cc-mode
   :config
   ;; C 4 space tabs
-  (setq c-basic-offset tab-width
-        c-backspace-function #'backward-delete-char))
+  (setq-default c-basic-offset tab-width
+				c-backspace-function #'backward-delete-char))
 
 (use-package xcscope
   :init
@@ -141,9 +141,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 
 (use-package boogie-friends
   :config
-  (setq flycheck-dafny-executable "/usr/local/share/dafny/dafny"))
-
-(flycheck-mode t)
+  (setq-default flycheck-dafny-executable "/usr/local/share/dafny/dafny"))
 
 (use-package haskell-mode)
 
@@ -151,15 +149,15 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   :init
   (ivy-mode 1)
   :config
-  (setq ivy-use-virtual-buffers t
-        ivy-count-format "(%d/%d) ")
+  (setq-default ivy-use-virtual-buffers t
+				ivy-count-format "(%d/%d) ")
   :bind
   ("C-x b" . ivy-switch-buffer))
 
 (use-package js
   :config
   ;; JavaScript 4 space tabs
-  (setq-default js-indent-level 4))
+  (setq-default js-indent-level tab-width))
 
 (use-package linum-relative
   :init
@@ -167,16 +165,16 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (linum-relative-mode)
   :config
   ;; Relative line numbers
-  (setq linum-relative-current-symbol "")
+  (setq-default linum-relative-current-symbol "")
   ;; Default linum string
   (unless (display-graphic-p)
     (add-hook 'linum-before-numbering-hook
               (lambda ()
-                (setq-local
+                (setq-default
                  linum-relative-format
 				 (let ((w (length (number-to-string
                                    (count-lines (point-min) (point-max))))))
-                   (concat "%" (number-to-string w) "s|")))))));"s\u2502")))))))
+                   (concat "%" (number-to-string w) "s|")))))))
 
 (use-package markdown-mode
   :config
@@ -210,16 +208,12 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (use-package org)
 
 (use-package prolog
-  :mode ("\\.pl\\'" . prolog-mode)
   :config
-  (setq prolog-system 'swi))
+  (setq-default prolog-system 'swi)
+  :mode
+  ("\\.pl\\'" . prolog-mode))
 
-(use-package python
-  :init
-  ;; Python 4 spaces
-  (add-hook 'python-mode-hook
-            (lambda ()
-              (setq indent-tabs-mode nil))))
+(use-package python)
 
 (use-package swiper
   :bind
@@ -233,10 +227,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 
 (use-package web-mode
   :config
-  (setq-default
-   web-mode-markup-indent-offset 4      ; HTML
-   web-mode-css-indent-offset    4      ; CSS
-   web-mode-code-indent-offset   4)     ; JS/PHP/etc.
+  (setq-default web-mode-markup-indent-offset tab-width      ; HTML
+				web-mode-css-indent-offset    tab-width      ; CSS
+				web-mode-code-indent-offset   tab-width)     ; JS/PHP/etc.
   :mode
   "\\.html?\\'"
   "\\.phtml\\'"
@@ -249,11 +242,13 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 
 (use-package whitespace
   :init
-  (global-whitespace-mode)
+  (add-hook 'prog-mode-hook
+			(lambda ()
+			  (whitespace-mode)))
   :config
   (setq-default whitespace-style '(face
-                                   trailing      ; trailing blanks
-                                   empty         ; empty start/end of buffer
+								   trailing      ; trailing blanks
+								   empty         ; empty start/end of buffer
 								   lines-tail))) ; character limit
 
 (use-package windmove
