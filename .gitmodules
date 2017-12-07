@@ -1,0 +1,3 @@
+[submodule "fzf.symlink"]
+	path = fzf.symlink
+	url = https://github.com/junegunn/fzf.git
