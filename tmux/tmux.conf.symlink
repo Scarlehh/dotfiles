@@ -23,13 +23,8 @@ bind - split-window -v -c '#{pane_current_path}'
 unbind '"'
 unbind %
 
-# Enable mouse control (clickable windows, panes, resizable panes)
-set -g mouse-select-window on
-set -g mouse-select-pane on
-set -g mouse-resize-pane on
-
 # Enable mouse mode
-#set -g mouse on
+set -g mouse on
 
 # Settings
 set -g xterm-keys on
