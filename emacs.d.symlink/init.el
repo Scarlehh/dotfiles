@@ -24,13 +24,13 @@ See URL `http://emacs.stackexchange.com/a/3822' for limitations
 and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 .emacs.d/init.el' for inspiration."
   (let ((line-number-display-limit-width most-positive-fixnum) ; Any line width
-        (line-number-display-limit nil)                        ; Any buffer size
-        (pmax (point-max)))
-    (save-excursion
-      (goto-char pmax)
-      ;; Adjust for trailing newline
-      (funcall (if (= pmax (line-beginning-position)) #'1- #'identity)
-               (string-to-number (format-mode-line "%l"))))))
+		(line-number-display-limit nil)						   ; Any buffer size
+		(pmax (point-max)))
+	(save-excursion
+	  (goto-char pmax)
+	  ;; Adjust for trailing newline
+	  (funcall (if (= pmax (line-beginning-position)) #'1- #'identity)
+			   (string-to-number (format-mode-line "%l"))))))
 
 
 ;;; ----------------
@@ -41,20 +41,20 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (defun copy-to-x-clipboard (&optional start end)
   (interactive "r")
   (let ((code (shell-command-on-region
-               (or start (region-beginning))
-               (or end   (region-end))
-               "xsel -ib")))
-    (if (/= code 0)
-        (message "xsel returned error code %d" code)
-      (message "Yanked region to clipboard!")
-      (deactivate-mark))))
+			   (or start (region-beginning))
+			   (or end	 (region-end))
+			   "xsel -ib")))
+	(if (/= code 0)
+		(message "xsel returned error code %d" code)
+	  (message "Yanked region to clipboard!")
+	  (deactivate-mark))))
 
 ;; Paste
 (defun paste-from-x-clipboard ()
   (interactive)
   (let ((code (call-process-shell-command "xsel -ob" nil t)))
-    (unless (zerop code)
-      (message "xsel returned error code %d" code))))
+	(unless (zerop code)
+	  (message "xsel returned error code %d" code))))
 
 
 ;;; -----------
@@ -63,7 +63,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 
 ;; Default indentation with 4 space tabs
 (setq-default indent-tabs-mode t
-              tab-width 4)
+			  tab-width 4)
 
 
 ;;; ---------
@@ -86,7 +86,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
-(setq-default use-package-always-defer  t
+(setq-default use-package-always-defer	t
 			  use-package-always-ensure t)
 
 ;; Defined packages
@@ -95,8 +95,8 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   :init
   ;; LaTeX
   (add-hook 'LaTeX-mode-hook
-            (lambda()
-              (setq-default LaTeX-indent-level tab-width
+			(lambda()
+			  (setq-default LaTeX-indent-level tab-width
 							LaTeX-item-indent 0
 							TeX-brace-indent-level tab-width
 							indent-tabs-mode t))))
@@ -168,13 +168,13 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (setq-default linum-relative-current-symbol "")
   ;; Default linum string
   (unless (display-graphic-p)
-    (add-hook 'linum-before-numbering-hook
-              (lambda ()
-                (setq-default
-                 linum-relative-format
+	(add-hook 'linum-before-numbering-hook
+			  (lambda ()
+				(setq-default
+				 linum-relative-format
 				 (let ((w (length (number-to-string
-                                   (count-lines (point-min) (point-max))))))
-                   (concat "%" (number-to-string w) "s|")))))))
+								   (count-lines (point-min) (point-max))))))
+				   (concat "%" (number-to-string w) "s|")))))))
 
 (use-package markdown-mode
   :config
@@ -227,9 +227,9 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 
 (use-package web-mode
   :config
-  (setq-default web-mode-markup-indent-offset tab-width      ; HTML
-				web-mode-css-indent-offset    tab-width      ; CSS
-				web-mode-code-indent-offset   tab-width)     ; JS/PHP/etc.
+  (setq-default web-mode-markup-indent-offset tab-width		 ; HTML
+				web-mode-css-indent-offset	  tab-width		 ; CSS
+				web-mode-code-indent-offset	  tab-width)	 ; JS/PHP/etc.
   :mode
   "\\.html?\\'"
   "\\.phtml\\'"
@@ -247,15 +247,18 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 			  (whitespace-mode)))
   :config
   (setq-default whitespace-style '(face
-								   trailing      ; trailing blanks
-								   empty         ; empty start/end of buffer
+								   space-after-tab
+								   space-before-tab
+								   indentation::tab
+								   trailing		 ; trailing blanks
+								   empty		 ; empty start/end of buffer
 								   lines-tail))) ; character limit
 
 (use-package windmove
   :bind
   ("M-<left>"  . windmove-left)
   ("M-<down>"  . windmove-down)
-  ("M-<up>"    . windmove-up)
+  ("M-<up>"	   . windmove-up)
   ("M-<right>" . windmove-right))
 
 ;;; -----------
@@ -263,14 +266,14 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 ;;; -----------
 
 (bind-keys
- ;; ("DEL"     . backward-delete-char)
+ ;; ("DEL"	   . backward-delete-char)
  ;; `bind-keys' interpets "C-e RET" literally, so use keyboard macro syntax ;_;
- ("C-o"     . "\C-e\C-m")
- ("C-j"     . "\C-a\C-m\C-p")
+ ("C-o"		. "\C-e\C-m")
+ ("C-j"		. "\C-a\C-m\C-p")
  ("C-x C-w" . copy-to-x-clipboard)
  ("C-x C-y" . paste-from-x-clipboard)
- ("C-x w"   . whitespace-cleanup)
- ("M-k"     . "\C-k\C-y"))
+ ("C-x w"	. whitespace-cleanup)
+ ("M-k"		. "\C-k\C-y"))
 
 
 ;;; -------
