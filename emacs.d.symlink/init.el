@@ -249,7 +249,6 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   (setq-default whitespace-style '(face
 								   space-after-tab
 								   space-before-tab
-								   indentation::tab
 								   trailing		 ; trailing blanks
 								   empty		 ; empty start/end of buffer
 								   lines-tail))) ; character limit
@@ -289,7 +288,7 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  '(custom-enabled-themes (quote (tango-dark)))
  '(package-selected-packages
    (quote
-	(xcscope boogie-friends neotree bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
+	(yaml-mode xcscope boogie-friends neotree bookmark+ auto-capitalize auctex web-mode web-beautify use-package undo-tree swiper markdown-mode linum-relative haskell-mode goto-chg csharp-mode avy-zap))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
