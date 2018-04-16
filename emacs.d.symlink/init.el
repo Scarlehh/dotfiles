@@ -143,6 +143,12 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
   :config
   (setq-default flycheck-dafny-executable "/usr/local/share/dafny/dafny"))
 
+(use-package flyspell
+  :init
+  (add-hook 'text-mode-hook
+			(lambda ()
+			  (flyspell-mode))))
+
 (use-package haskell-mode)
 
 (use-package ivy
@@ -297,3 +303,4 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
  )
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
