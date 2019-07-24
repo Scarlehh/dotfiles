@@ -32,6 +32,12 @@ and URL `https://github.com/basil-conto/dotfiles/blob/master/\
 	  (funcall (if (= pmax (line-beginning-position)) #'1- #'identity)
 			   (string-to-number (format-mode-line "%l"))))))
 
+(defun create-tags (dir-name)
+  "Create tags file."
+  (interactive "DDirectory: ")
+  (eshell-command
+   (format "find %s -type f -name '*.[ch]' -o -name '*.py' | etags -" dir-name)))
+
 
 ;;; ----------------
 ;;; System Clipboard
