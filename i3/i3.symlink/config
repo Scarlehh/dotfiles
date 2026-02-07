@@ -157,10 +157,10 @@ bindsym $mod+c exec gnome-calculator
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        status_command i3status
-        tray_output primary
-}
+#bar {
+#        status_command i3status
+#        tray_output primary
+#}
 
 # Multimedia keys
 # Pulse Audio controls
@@ -168,14 +168,16 @@ bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #i
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set +10% # increase screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 10-% # decrease screen brightness
 
 # Startup launchers
 # Keyboard
-exec setxkbmap gb
+exec setxkbmap us
 exec nm-applet
 exec dropbox
+exec_always --no-startup-id ~/.i3/polybar.sh &
+exec --no-startup-id onboard &
 
 # Programmer uk mode (num keys and brackets swapper)
 bindsym $mod+p exec "setxkbmap gb; xmodmap -e 'keysym 0x031 = 0x021 0x031'; xmodmap -e 'keysym 0x032 = 0x022 0x032'; xmodmap -e 'keysym 0x033 = 0x0a3 0x033'; xmodmap -e 'keysym 0x034 = 0x024 0x034'; xmodmap -e 'keysym 0x035 = 0x025 0x035'; xmodmap -e 'keysym 0x036 = 0x05e 0x036'; xmodmap -e 'keysym 0x037 = 0x026 0x037'; xmodmap -e 'keysym 0x038 = 0x02a 0x038'; xmodmap -e 'keysym 0x039 = 0x028 0x039'; xmodmap -e 'keysym 0x030 = 0x029 0x030'; xmodmap -e 'keysym 0x05b = 0x07b 0x05b'; xmodmap -e 'keysym 0x05d = 0x07d 0x05d'; xmodmap -e 'keysym 0x5c = 0x7c 0x5c'"
