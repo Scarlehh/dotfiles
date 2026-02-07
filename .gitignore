@@ -1,2 +1,4 @@
 emacs.d.symlink/elpa/*
+emacs.d.symlink/eln-cache/*
 emacs.d.symlink/recentf
+config.symlink/mozilla/*
